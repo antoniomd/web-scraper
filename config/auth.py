@@ -1,3 +1,4 @@
-token = 'mytoken'                   # Token del bot
-chat_id = 'mychastid'               # Chat ID de prueba
-url = 'https://www.mediamarkt.es/es/product/_frigor%C3%ADfico-combi-siemens-kg39nvida-36-db-no-frost-366-l-a-inox-1474566.html'     # URL del articulo
+token = 'mytoken'                  # Token del bot
+chat_id = 'mychatID'               # Chat ID de prueba
+url = 'myurl'                      # URL del articulo
+priceLimit = 000.00                # Precio límite para notificar

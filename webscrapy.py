@@ -7,27 +7,35 @@ Usage:
 Start a bot in Telegram, pass an url and a price limit and wait til bot send a notification to yousource venv/bin/activate
 """
 
-# Importo las funciones utilizadas (Confirmar que son necesarias)
+# Importo las funciones utilizadas
 import requests 
-# , sys, urllib2, hashlib, os, ssl
-#bfrom urlparse import urlparse
 from bs4 import BeautifulSoup
-
-# Importo las funciones utilizadas para Telegram
-# import logging
-# from telegram import ReplyKeyboardMarkup
-# from telegram.ext import (Updater, CommandHandler, MessageHandler, Filters,
-#                           ConversationHandler)
 
 # Importo la configuración del fichero
 from config.auth import *
 
+def telegram_bot_sendtext(bot_message):
+    
+    send_text = 'https://api.telegram.org/bot' + token + '/sendMessage?chat_id=' + chat_id + '&parse_mode=Markdown&text=' + bot_message
+
+    print(send_text)
+
+    requests.post(send_text)
+
 def main():
     myUrl = requests.get(url)
-
     soup = BeautifulSoup(myUrl.content, 'html.parser')
 
-    print(soup.prettify())
+    priceContent = soup.find("meta",  property="product:price:amount")
+    price = float(priceContent["content"])
+
+    if price < priceLimit:
+        message = 'El precio del articulo es ' + str(price) + ' y es menor que el precio límite indicado de ' + str(priceLimit)
+        telegram_bot_sendtext(message)
+    
+    else:
+        message = 'El precio del articulo es mayor que el precio límite indicado'
+        telegram_bot_sendtext(message)
 
 if __name__ == "__main__":
 	main()
