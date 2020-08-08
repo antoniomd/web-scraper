@@ -5,6 +5,7 @@
 This script sends a notification when an item in cheaper than price maximum
 Usage:
 Pass an item, url and a price max in auth.py and wait til bot sends a notification to you
+A Telegram bot and Telegram user ID is required
 """
 
 # Importo las funciones utilizadas
@@ -31,6 +32,7 @@ def getPrice(url):
         return price
 
 
+# Envía un mensaje a través de Telegram
 def telegram_bot_sendtext(bot_message):
     send_text = 'https://api.telegram.org/bot' + token + '/sendMessage?chat_id=' + userTelegramID + '&parse_mode=Markdown&text=' + bot_message
     requests.post(send_text)
