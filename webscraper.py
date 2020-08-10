@@ -48,12 +48,12 @@ def main():
         price = getPrice(url)                   # Se llama a la función getPrice donde extraigo el precio de la página
 
         # Si no encuentro el precio en la url envío una notificación para indicarlo
-        if not price:
+        if price == None:
             message = 'No se encuentra el precio en la url indicada'
             telegram_bot_sendtext(message)
 
         # Si el precio es inferior al precio máximo lo notifico
-        if price < priceMax:
+        elif price < priceMax:
             message = 'El precio del articulo ' + item + ' es ' + str(price) + ' y es menor que el precio límite indicado de ' + str(priceMax)
             telegram_bot_sendtext(message)
 
